@@ -1,0 +1,18 @@
+:root{
+    --primary-text-color : gray(24%);
+
+    --shadow-text-theme: {
+        padding: 10px;
+        font-size: 1rem;
+        font-smoothing: antialiased;
+        font-weight: 300;
+        color: var(--primary-text-color);
+        text-align: right;
+        text-shadow: 0 0 2px wheat;
+        text-rendering: optimizeLegibility;
+    }
+
+    /*use to  @apply --shadow-text-theme;*/
+    /*importing index.css        @import '../../constants';*/
+
+}
