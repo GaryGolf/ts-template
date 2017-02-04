@@ -75,12 +75,14 @@ module.exports = {
         context: sourcePath,
         postcss: [
           require('postcss-smart-import')({ addDependencyTo: webpack }),
-          // require('postcss-url')(),
           require('postcss-cssnext')(),
           require('postcss-reporter')(),
           require('postcss-browser-reporter')({ disabled: PRODUCTION }),
         ]
       }
+    }),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(PRODUCTION),
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
