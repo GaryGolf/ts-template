@@ -10,3 +10,5 @@ declare module '*.css' {
 declare interface Window {
   devToolsExtension?(): (args?: any) => any;
 }
+// enviroment constant
+declare const PRODUCTION: boolean

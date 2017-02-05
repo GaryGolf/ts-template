@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { RootState } from '../../reducers';
-import * as TodoActions from '../../actions/todos';
-import Header from '../../components/Header';
-import MainSection from '../../components/MainSection';
-import * as style from './style.css';
+import * as React from 'react'
+import { bindActionCreators } from 'redux'
+import { RootState } from '../../reducers'
+import * as TodoActions from '../../actions/todos'
+import Header from '../../components/Header'
+import MainSection from '../../components/MainSection'
+
+const {connect} = require('react-redux')
+const style = require('./style.css')
 
 interface AppProps {
   todos: TodoItemData[];
@@ -15,8 +16,15 @@ interface AppProps {
 interface AppState {
   /* empty */
 }
-
-class App extends React.Component<AppProps, AppState>{
+@connect(
+  state => ({
+    todos: state.todos
+  }),
+  dispatch => ({
+    actions: bindActionCreators(TodoActions as any, dispatch)
+  })
+)
+export default class App extends React.Component<AppProps, AppState>{
   render() {
     const { todos, actions, children } = this.props;
     return (
@@ -25,23 +33,6 @@ class App extends React.Component<AppProps, AppState>{
         <MainSection todos={todos} actions={actions} />
         {children}
       </div>
-    );
+    )
   }
 }
-
-function mapStateToProps(state: RootState) {
-  return {
-    todos: state.todos
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(TodoActions as any, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);

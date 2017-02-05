@@ -1,14 +1,11 @@
-const webpack = require('webpack')
 const path = require('path')
-
-// variables
-const PRODUCTION = process.argv.indexOf('-p') >= 0
-const sourcePath = path.join(__dirname, './src')
-const outPath = path.join(__dirname, './dist')
-
-// plugins
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const outPath = path.join(__dirname, './dist')
+const sourcePath = path.join(__dirname, './src')
+const PRODUCTION = process.argv.indexOf('-p') >= 0
 
 module.exports = {
   context: sourcePath,
