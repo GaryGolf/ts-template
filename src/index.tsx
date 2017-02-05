@@ -1,10 +1,8 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import  { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-
-const  { Router, Route, browserHistory } = require('react-router')
-
 import App from './containers/App'
 import configureStore from './store'
 

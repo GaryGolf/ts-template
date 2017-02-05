@@ -1,29 +1,29 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
-import * as style from './style.css';
+import * as React from 'react'
+import * as classNames from 'classnames'
+const style = require('./style.css')
 
 interface TodoTextInputProps {
-  text?: string;
-  placeholder?: string;
-  newTodo?: boolean;
-  editing?: boolean;
-  onSave: (text: string) => any;
+  text?: string
+  placeholder?: string
+  newTodo?: boolean
+  editing?: boolean
+  onSave: (text: string) => any
 };
 
 interface TodoTextInputState {
-  text: string;
+  text: string
 };
 
-class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputState> {
+export default class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputState> {
 
   constructor(props?: TodoTextInputProps, context?: any) {
     super(props, context);
     this.state = {
       text: this.props.text || ''
-    };
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    }
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSubmit(e) {
@@ -48,10 +48,15 @@ class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputSta
   }
 
   render() {
-    const classes = classNames({
-      [style.edit]: this.props.editing,
-      [style.new]: this.props.newTodo
-    }, style.normal);
+    // const classes = classNames({
+    //   [style.edit]: this.props.editing,
+    //   [style.new]: this.props.newTodo
+    // }, style.normal);
+    
+    const classes = [
+      this.props.editing ? style.edit : null,
+      this.props.newTodo ? style.new : null,
+    ].join(' ')
 
     return (
       <input className={classes}
@@ -62,8 +67,6 @@ class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputSta
         onBlur={this.handleBlur}
         onChange={this.handleChange}
         onKeyDown={this.handleSubmit} />
-    );
+    )
   }
 }
-
-export default TodoTextInput;
