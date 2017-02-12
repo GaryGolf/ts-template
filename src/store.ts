@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, Store, Middleware } from 'redux'
 import * as createLogger from 'redux-logger'
 import ReduxThunk from 'redux-thunk'
-import promiseMiddleware from 'redux-promise-middleware'
 import {routerMiddleware} from 'react-router-redux'
 import rootReducer, { RootState } from './reducers'
 
@@ -10,7 +9,7 @@ export default function configureStore(history, initialState?: RootState): Store
     ? window.devToolsExtension()(createStore)
     : createStore
 
-  const middleware: Middleware[] =[ReduxThunk, promiseMiddleware(), routerMiddleware(history)] 
+  const middleware: Middleware[] =[ReduxThunk, routerMiddleware(history)] 
   if(!PRODUCTION) middleware.push(createLogger({collapsed: true}))  
   const createStoreWithMiddleware = applyMiddleware(...middleware)(create)
 
