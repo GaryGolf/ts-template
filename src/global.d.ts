@@ -8,6 +8,8 @@ declare module '*.css' {
 
 // for redux devtools extension
 declare interface Window {
+  __INITIAL_STATE__?: any;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: <F extends Function>(f: F) => F;
   devToolsExtension?(): (args?: any) => any;
 }
 // enviroment constant
