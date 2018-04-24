@@ -2,12 +2,12 @@ import { routerReducer as routing, RouteActions } from 'react-router-redux';
 import { combineReducers, Reducer } from 'redux';
 import todos from './todos';
 
-export interface RootState {
+export interface AppState {
   routing: RouteActions;
   todos: TodoStoreState;
 }
 
-export default combineReducers<RootState>({
+export default combineReducers<AppState>({
   routing,
   todos
 });

@@ -1,20 +1,20 @@
 const appConfig = require('../../../config/main');
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware, Middleware } from 'react-router-redux';
+import { createStore, applyMiddleware, compose, Store, Middleware } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import rootReducer, { RootState } from './reducers';
+import rootReducer, { AppState } from './reducers';
 import { createLogger } from 'redux-logger';
 
-export function configureStore(history, initialState?: RootState): Redux.Store<RootState> {
+export function configureStore(history, initialState?: AppState): Store<AppState> {
 
-  const middlewares: Redux.Middleware[] = [
+  const middlewares: Middleware[] = [
     routerMiddleware(history),
     thunk,
   ];
 
   /** Add Only Dev. Middlewares */
   if (appConfig.env !== 'production' && process.env.BROWSER) {
-    const logger = createLogger();
+    const logger = createLogger({collapsed: true});
     middlewares.push(logger);
   }
 
@@ -22,7 +22,7 @@ export function configureStore(history, initialState?: RootState): Redux.Store<R
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-  const store: Redux.Store<IStore> = createStore<IStore>(rootReducer, initialState, composeEnhancers(
+  const store: Store<AppState> = createStore<AppState>(rootReducer, initialState, composeEnhancers(
     applyMiddleware(...middlewares),
   ));
 
